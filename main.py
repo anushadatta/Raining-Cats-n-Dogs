@@ -62,6 +62,16 @@ def animal(x,y,i):
 
 def isCollision(animalX, animalY, playerX, playerY):
     distance = math.sqrt(math.pow(animalX-playerX, 2) + math.pow(animalY-playerY,2))
+    
+    x_distance = abs(playerX - animalX) 
+    y_distance = abs(playerY - animalY)
+
+    if distance < 60:
+        return True
+    elif x_distance < 80 and y_distance < 40:
+        return True
+    else:
+        return False 
 
 # Score 
 score_value = 0 
