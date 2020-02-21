@@ -65,21 +65,27 @@ textX= 10
 textY= 10
 
 def showScore(x, y):
-    score = font.render("SCORE: "+ str(score_value), True, (0,0,0))
+    score = font.render("SCORE: "+ str(score_value), True, (10,10,10))
     screen.blit(score, (x,y))
 
 # Time 
 startTime = time.time() 
 
 def showTime(time):
-    time = font.render("TIME: " + time, True, (0,0,0))
+    minutes = time//60
+    seconds = time%60
+
+    if(seconds < 10):
+        time = font.render("TIME " + str(minutes) + ":0" + str(seconds), True, (10,10,10))
+    else:
+        time = font.render("TIME " + str(minutes) + ":" + str(seconds), True, (10,10,10))
     screen.blit(time, (10,50))
 
 # Game Over 
 over_font = pygame.font.Font('freesansbold.ttf',64)
 
 def game_over_text():
-    game_over = over_font.render("GAME OVER", True, (0,0,0))
+    game_over = over_font.render("GAME OVER", True, (10,10,10))
     screen.blit(game_over, (200,250))
 
 # Game loop (persistence of game screen)
@@ -143,14 +149,16 @@ while running:
         animalY = 30
     
     # TIMER
-    updated_time = str(time.time() - startTime)
-    updated_time = str(int(time.time() - startTime))
+    if(animalY < 534):
+        updated_time = int(time.time() - startTime)
 
     # GameOver
     if animalY == 534:
-        game_over_text()
         gameover_sound = mixer.Sound('assets/GameOver.flac')
         gameover_sound.play()
+        
+    if animalY >= 534:
+        game_over_text()
 
     player(playerX,playerY)
     animal(animalX,animalY)
@@ -159,7 +167,3 @@ while running:
 
     # Continually update game screen 
     pygame.display.update()
-
-        
-
-
