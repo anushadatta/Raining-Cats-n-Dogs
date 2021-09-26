@@ -137,15 +137,15 @@ while running:
             if event.key == pygame.K_LEFT or pygame.K_RIGHT:
                 playerX_change = 0 
 
-    # Adding boundaries 
+    # Updating basket position horizontally
+    playerX += playerX_change
+
+    # Adding boundaries
     if playerX <= 0:
         playerX = 0
-    
+
     if playerX >= 670:
         playerX = 670
-    
-    # Updating basket position horizontally 
-    playerX += playerX_change
 
     for i in range(2):
         # Updating animal direction vertically 
